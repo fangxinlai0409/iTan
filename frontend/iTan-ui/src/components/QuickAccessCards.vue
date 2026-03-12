@@ -34,7 +34,7 @@
 
         <div v-if="variant === 'home'" class="card-image">
           <img
-            src="https://images.unsplash.com/photo-1515886657613-9f3515b0c78f?auto=format&fit=crop&w=800&q=80"
+            src="https://images.unsplash.com/photo-1618071147329-803bf99d9746?w=700&auto=format&fit=crop&q=60&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjB8fHN1bmdsYXNzZXN8ZW58MHx8MHx8fDA%3D"
             alt="Sun-safe outdoor clothing"
           />
         </div>
@@ -75,7 +75,7 @@
 
         <div v-if="variant === 'home'" class="card-image">
           <img
-            src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=800&q=80"
+            src="https://images.pexels.com/photos/33044/sunflower-sun-summer-yellow.jpg"
             alt="Young adults learning outdoors"
           />
         </div>
@@ -203,7 +203,7 @@ h3 {
 }
 
 .card-image {
-  height: 300px;
+  height: 350px;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 14px 28px rgba(15,23,42,0.12);
