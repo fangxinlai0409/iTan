@@ -2,6 +2,7 @@
   <nav class="top-nav">
     <div class="brand">iTan</div>
     <ul>
+      <li><RouterLink to="/">Home</RouterLink></li>
       <li><RouterLink to="/uv">Current UV</RouterLink></li>
       <li><RouterLink to="/protection">Protection Advice</RouterLink></li>
       <li><RouterLink to="/news">News Center</RouterLink></li>

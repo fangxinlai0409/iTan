@@ -3,12 +3,13 @@ import { createRouter, createWebHistory } from 'vue-router'
 import UvPage from '../views/UvPage.vue'
 import ProtectionPage from '../views/ProtectionPage.vue'
 import NewsPage from '../views/NewsPage.vue'
+import HomePage from '@/views/HomePage.vue'
 
 const routes = [
-  { path: '/', redirect: '/uv' },
   { path: '/uv', name: 'uv', component: UvPage },
   { path: '/protection', name: 'protection', component: ProtectionPage },
   { path: '/news', name: 'news', component: NewsPage },
+  { path: '/', name: 'home', component: HomePage },
 ]
 
 const router = createRouter({
