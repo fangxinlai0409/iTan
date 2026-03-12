@@ -28,7 +28,7 @@ class CurrentUVView(APIView):
             {
                 "reading": serializer.data,
                 "warning": warning,
-                "trend": get_uv_trend(),
+                "trend": get_uv_trend(float(reading.uv_index)),
                 "fetched_at": datetime.utcnow().isoformat() + "Z",
             }
         )
@@ -55,7 +55,14 @@ class CancerStatisticView(APIView):
 
 class UVRegionView(APIView):
     def get(self, request):
-        return Response({"regions": get_region_uv_map()})
+        current_uv = request.GET.get("uv")
+
+        if current_uv is not None:
+            current_uv = float(current_uv)
+
+        return Response({
+            "regions": get_region_uv_map(current_uv=current_uv)
+        })
 
 
 class ProtectionAdviceView(APIView):

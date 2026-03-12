@@ -21,19 +21,7 @@
       <p class="warning">{{ warning }}</p>
       <div class="trend">
         <h3>Today's trend</h3>
-        <svg class="trend-chart" viewBox="0 0 200 160" preserveAspectRatio="none">
-          <polyline
-            :points="chartPoints"
-            stroke="currentColor"
-            fill="none"
-            stroke-width="3"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          ></polyline>
-        </svg>
-        <div class="trend-labels">
-          <span v-for="point in trend" :key="point.time">{{ formatHour(point.time) }}</span>
-        </div>
+        <UVTrendChart :trend="trend" />
       </div>
     </div>
   </section>
@@ -41,7 +29,7 @@
 
 <script setup>
 import { computed } from 'vue'
-
+import UVTrendChart from './UVTrendChart.vue'
 const props = defineProps({
   reading: {
     type: Object,
@@ -76,41 +64,7 @@ const riskClass = computed(() => {
     : 'risk-low'
 })
 
-const chartPoints = computed(() => {
-  if (!props.trend.length) return ''
 
-  const values = props.trend.map((point) => Number(point.uv_index) || 0)
-  const rawMax = Math.max(...values, 1)
-  const visualMax = rawMax < 3 ? 3 : rawMax
-
-  const width = 200
-  const height = 160
-  const topPadding = 16
-  const bottomPadding = 16
-  const drawableHeight = height - topPadding - bottomPadding
-
-  return props.trend
-    .map((point, index) => {
-      const uv = (Number(point.uv_index) || 0) * 1.8
-      const x = (index / (props.trend.length - 1 || 1)) * width
-      const y =
-        height -
-        bottomPadding -
-        (Math.min(uv, visualMax) / visualMax) * drawableHeight
-
-      return `${x},${y}`
-    })
-    .join(' ')
-})
-
-const formatHour = (isoString) => {
-  if (!isoString) return '--'
-  const date = new Date(isoString)
-  return date.toLocaleTimeString([], {
-    hour: '2-digit',
-    minute: '2-digit',
-  })
-}
 </script>
 
 <style scoped>
@@ -188,24 +142,6 @@ h2 {
 
 .trend {
   margin-top: 12px;
-}
-
-.trend-chart {
-  display: block;
-  width: 100%;
-  height: 360px;
-  margin-top: 8px;
-  color: #2563eb;
-  background: #eff6ff;
-  border-radius: 12px;
-}
-
-.trend-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-  font-size: 0.9rem;
-  color: #6b7280;
 }
 
 .risk-low {

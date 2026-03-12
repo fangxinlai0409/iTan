@@ -43,7 +43,8 @@ const loadStats = async () => {
 const loadRegions = async () => {
   loading.regions = true
   try {
-    uvRegions.value = await fetchUVRegions()
+    const currentUV = uvPayload.value?.reading?.uv_index ?? 0
+    uvRegions.value = await fetchUVRegions(currentUV)
   } finally {
     loading.regions = false
   }
@@ -60,9 +61,9 @@ const loadRules = async (uvIndex = 0) => {
   }
 }
 
-const refreshAll = () => {
-  loadUV()
-  loadStats()
+const refreshAll = async () => {
+  await loadUV()
+  await loadStats()
   loadRegions()
 }
 

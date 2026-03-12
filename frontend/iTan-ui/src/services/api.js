@@ -25,7 +25,9 @@ export const fetchProtectionRules = async (uvValue) => {
   return response.data
 }
 
-export const fetchUVRegions = async () => {
-  const response = await apiClient.get('uv/regions/')
+export const fetchUVRegions = async (uv) => {
+  const response = await apiClient.get('uv/regions/', {
+    params: { uv }
+  })
   return response.data.regions
 }

@@ -1,5 +1,6 @@
 <template>
   <section class="news-page">
+    <SkinCancerChart :series="state.cancerStats.value" :loading="state.loading.stats" @refresh="actions.loadStats" />
     <KnowledgeFeed :items="state.knowledgeItems.value" />
   </section>
 </template>
@@ -7,8 +8,14 @@
 <script setup>
 import KnowledgeFeed from '../components/KnowledgeFeed.vue'
 
+import SkinCancerChart from '../components/SkinCancerChart.vue'
+
 const props = defineProps({
   state: {
+    type: Object,
+    required: true,
+  },
+  actions: {
     type: Object,
     required: true,
   },

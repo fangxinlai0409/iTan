@@ -96,10 +96,10 @@ watch(
 )
 
 const buckets = [
-  { max: 2, color: '#22c55e', label: 'Low (0-2)' },
-  { max: 5, color: '#facc15', label: 'Moderate (3-5)' },
-  { max: 7, color: '#fb923c', label: 'High (6-7)' },
-  { max: 10, color: '#ef4444', label: 'Very high (8-10)' },
+  { max: 2.9, color: '#22c55e', label: 'Low (0-2.9)' },
+  { max: 5.9, color: '#facc15', label: 'Moderate (3-5.9)' },
+  { max: 7.9, color: '#fb923c', label: 'High (6-7.9)' },
+  { max: 10.9, color: '#ef4444', label: 'Very high (8-10.9)' },
   { max: Infinity, color: '#7c3aed', label: 'Extreme (11+)' },
 ]
 

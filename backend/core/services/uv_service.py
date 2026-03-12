@@ -95,25 +95,37 @@ def get_protection_advice(uv_value: float) -> str:
     return f"UV {uv_value}: apply broad-spectrum SPF50+, seek shade within {burn_minutes} minutes."
 
 
-def get_uv_trend(hours: int = 6) -> list[dict]:
+def get_uv_trend(current_uv: float, hours: int = 6) -> list[dict]:
     base = datetime.now(timezone.utc)
     trend = []
+
     for offset in range(hours):
         hour_time = base + timedelta(hours=offset)
-        uv_value = max(0, mock_uv_value() - offset * 0.5)
+
+        if offset == 0:
+            uv_value = current_uv
+        else:
+            uv_value = current_uv + (3 - offset) * uniform(0.3, 0.8)
+
         risk_label, _ = classify_uv(uv_value)
+
         trend.append({
             "time": hour_time.isoformat(),
-            "uv_index": uv_value,
+            "uv_index": round(uv_value, 1),
             "risk_level": risk_label,
         })
+
     return trend
 
 
-def get_region_uv_map() -> list[dict]:
+def get_region_uv_map(current_uv: float | None = None) -> list[dict]:
     snapshot = []
     for code, baseline in REGIONAL_BASELINES.items():
-        uv_value = round(max(0, baseline + uniform(-1.5, 1.5)), 1)
+        if code == "VIC" and current_uv is not None:
+            uv_value = round(float(current_uv), 1)
+        else:
+            uv_value = round(max(0, baseline + uniform(-1.5, 1.5)), 1)
+
         risk_label, burn_minutes = classify_uv(uv_value)
         snapshot.append(
             {

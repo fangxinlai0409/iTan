@@ -15,14 +15,14 @@
         :loading="state.loading.regions"
         @refresh="actions.loadRegions"
       />
-      <SkinCancerChart :series="state.cancerStats.value" :loading="state.loading.stats" @refresh="actions.loadStats" />
+      <QuickAccessCards />
     </div>
   </section>
 </template>
 
 <script setup>
 import AustraliaHeatMap from '../components/AustraliaHeatMap.vue'
-import SkinCancerChart from '../components/SkinCancerChart.vue'
+import QuickAccessCards from '../components/QuickAccessCards.vue'
 import UVAlertPanel from '../components/UVAlertPanel.vue'
 
 const props = defineProps({
